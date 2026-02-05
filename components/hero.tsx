@@ -20,7 +20,7 @@ export function Hero() {
         <img
           src="/hero-coach.jpg"
           alt=""
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover opacity-40"
         />
         <div className="absolute inset-0 bg-[#f4efe6]/80" />
       </div>
