@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -34,18 +35,15 @@ export function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative h-10 w-10 rounded-full bg-primary flex items-center justify-center">
-              <span className="font-serif text-primary-foreground font-bold text-lg">F</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-serif text-xl font-bold text-foreground tracking-wide">
-                FitHer<span className="text-primary">™</span>
-              </span>
-              <span className="text-[10px] text-muted-foreground tracking-widest uppercase">
-                Studio
-              </span>
-            </div>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.jpeg"
+              alt="FitHer Studio - Strong • Balanced • Unstoppable"
+              width={160}
+              height={60}
+              className="h-14 w-auto object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
