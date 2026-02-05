@@ -7,7 +7,8 @@ import { Award, Heart, Leaf, ArrowRight } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 export function About() {
-  const { ref, isVisible } = useScrollAnimation<HTMLElement>()
+  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>()
+
 
   return (
     <section
