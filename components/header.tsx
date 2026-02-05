@@ -28,20 +28,22 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+      className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 rounded-2xl ${
+        isScrolled 
+          ? "bg-card/95 backdrop-blur-md shadow-xl border border-border/50" 
+          : "bg-card/80 backdrop-blur-sm border border-transparent"
       }`}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
               src="/logo.jpeg"
               alt="FitHer Studio - Strong • Balanced • Unstoppable"
-              width={160}
-              height={60}
-              className="h-14 w-auto object-contain"
+              width={140}
+              height={50}
+              className="h-11 w-auto object-contain rounded-lg"
               priority
             />
           </Link>
@@ -52,7 +54,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300"
               >
                 {link.label}
               </Link>
@@ -61,7 +63,7 @@ export function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl px-6">
               <Link href="#contact">Book Free Call</Link>
             </Button>
           </div>
@@ -69,29 +71,29 @@ export function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden text-foreground"
+            className="md:hidden text-foreground p-2 hover:bg-muted rounded-xl transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-border">
-            <div className="flex flex-col gap-4">
+          <nav className="md:hidden py-4 border-t border-border/50 mt-2">
+            <div className="flex flex-col gap-3">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Button asChild className="mt-2 bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button asChild className="mt-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl">
                 <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
                   Book Free Call
                 </Link>

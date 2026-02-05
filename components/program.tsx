@@ -13,6 +13,7 @@ import {
   ArrowRight,
   CheckCircle
 } from "lucide-react"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 const features = [
   {
@@ -48,14 +49,21 @@ const features = [
 ]
 
 export function Program() {
+  const { ref, isVisible } = useScrollAnimation<HTMLElement>()
+
   return (
-    <section id="program" className="py-24 bg-background">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="program" className="py-28 bg-background">
+      <div 
+        ref={ref}
+        className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 transition-all duration-1000 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        }`}
+      >
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <p className="text-primary font-medium mb-4 tracking-wide uppercase text-sm">Signature Program</p>
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <p className="text-primary font-medium mb-4 tracking-widest uppercase text-sm">Signature Program</p>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-            The FitHer™ Lifestyle Lean Method™
+            The FitHer Lifestyle Lean Method
           </h2>
           <p className="text-lg text-muted-foreground text-pretty">
             A 90-day coaching program for real women who want real results without burnout
@@ -63,31 +71,34 @@ export function Program() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="bg-card border-border hover:border-primary/50 transition-colors group"
+              className={`bg-card border-border/50 hover:border-primary/30 transition-all duration-500 group rounded-2xl ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <CardContent className="p-6">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <feature.icon className="w-6 h-6 text-primary" />
+              <CardContent className="p-7">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+                  <feature.icon className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground">{feature.description}</p>
+                <h3 className="font-semibold text-foreground mb-2 text-lg">{feature.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
               </CardContent>
             </Card>
           ))}
         </div>
 
         {/* Program Highlights */}
-        <div className="bg-card border border-border rounded-2xl p-8 lg:p-12 mb-12">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div className="bg-card border border-border/50 rounded-3xl p-8 lg:p-14">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-foreground mb-6">
+              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-foreground mb-8">
                 {"What's Included in Your 90-Day Transformation"}
               </h3>
-              <ul className="space-y-4">
+              <ul className="space-y-5">
                 {[
                   "Personalized fitness assessment & goal setting",
                   "Custom meal plans with Indian recipes",
@@ -96,32 +107,32 @@ export function Program() {
                   "Mindfulness and stress management tools",
                   "Lifetime access to course materials"
                 ].map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
+                  <li key={index} className="flex items-start gap-4">
                     <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                     <span className="text-muted-foreground">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="bg-muted rounded-xl p-8 text-center">
-              <p className="text-muted-foreground mb-2">Investment in Yourself</p>
-              <div className="mb-4">
-                <span className="text-4xl font-bold text-foreground">₹24,999</span>
-                <span className="text-muted-foreground ml-2 line-through">₹39,999</span>
+            <div className="bg-muted/50 rounded-2xl p-10 text-center">
+              <p className="text-muted-foreground mb-3 tracking-wide text-sm">Investment in Yourself</p>
+              <div className="mb-5">
+                <span className="text-5xl font-bold text-foreground">₹24,999</span>
+                <span className="text-muted-foreground ml-3 line-through text-lg">₹39,999</span>
               </div>
-              <p className="text-sm text-primary mb-6">Limited Time Offer - Save ₹15,000</p>
-              <div className="space-y-3">
-                <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+              <p className="text-sm text-primary mb-8 font-medium">Limited Time Offer — Save ₹15,000</p>
+              <div className="space-y-4">
+                <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl py-6 h-auto text-base">
                   <Link href="#contact" className="flex items-center justify-center gap-2">
                     Join the Program
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" className="w-full border-primary/50 text-foreground hover:bg-primary/10 bg-transparent">
+                <Button asChild variant="outline" className="w-full border-border text-foreground hover:bg-muted bg-transparent rounded-xl py-6 h-auto">
                   <Link href="#contact">Book a Free Discovery Call</Link>
                 </Button>
               </div>
-              <p className="text-xs text-muted-foreground mt-4">EMI options available</p>
+              <p className="text-xs text-muted-foreground mt-5">EMI options available</p>
             </div>
           </div>
         </div>

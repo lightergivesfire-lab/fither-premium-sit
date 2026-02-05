@@ -21,19 +21,19 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-card border-t border-border">
+    <footer className="bg-card border-t border-border/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
-        <div className="py-12 grid md:grid-cols-3 gap-8 items-center">
+        <div className="py-14 grid md:grid-cols-3 gap-10 items-center">
           {/* Logo & Tagline */}
           <div>
-            <Link href="/" className="inline-block mb-3">
+            <Link href="/" className="inline-block mb-4">
               <Image
                 src="/logo.jpeg"
                 alt="FitHer Studio - Strong • Balanced • Unstoppable"
                 width={140}
                 height={52}
-                className="h-12 w-auto object-contain"
+                className="h-12 w-auto object-contain rounded-lg"
               />
             </Link>
             <p className="text-sm text-muted-foreground">
@@ -42,12 +42,12 @@ export function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-3">
             {footerLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
               >
                 {link.label}
               </Link>
@@ -62,7 +62,7 @@ export function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+                className="w-11 h-11 rounded-xl bg-muted/50 flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 aria-label={social.label}
               >
                 <social.icon className="w-5 h-5" />
@@ -72,13 +72,13 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} FitHer™ Studio. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="#" className="hover:text-primary transition-colors">
+        <div className="py-6 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+          <p>© {new Date().getFullYear()} FitHer Studio. All rights reserved.</p>
+          <div className="flex gap-8">
+            <Link href="#" className="hover:text-primary transition-colors duration-300">
               Privacy Policy
             </Link>
-            <Link href="#" className="hover:text-primary transition-colors">
+            <Link href="#" className="hover:text-primary transition-colors duration-300">
               Terms of Service
             </Link>
           </div>
