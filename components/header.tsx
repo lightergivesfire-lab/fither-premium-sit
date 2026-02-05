@@ -1,106 +1,70 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image"
-import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useEffect, useState } from "react"
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40)
     }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+
+    window.addEventListener("scroll", onScroll)
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  const navLinks = [
-    { href: "#about", label: "About" },
-    { href: "#program", label: "Program" },
-    { href: "#benefits", label: "Benefits" },
-    { href: "#testimonials", label: "Results" },
-    { href: "#contact", label: "Contact" },
-  ]
-
   return (
-    <header
-      className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 rounded-2xl ${
-        isScrolled 
-          ? "bg-card/95 backdrop-blur-md shadow-xl border border-border/50" 
-          : "bg-card/80 backdrop-blur-sm border border-transparent"
-      }`}
-    >
+   <header
+  className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+    scrolled
+      ? "bg-white/90 backdrop-blur-md shadow-sm rounded-b-3xl mx-4 mt-2"
+      : "bg-transparent"
+  }`}
+>
+
       <div className="mx-auto max-w-7xl px-6">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/logo.jpeg"
-              alt="FitHer Studio - Strong • Balanced • Unstoppable"
-              width={140}
-              height={50}
-              className="h-11 w-auto object-contain rounded-lg"
-              priority
-            />
+        <div className="flex h-20 items-center justify-between">
+
+          {/* ================= LOGO ================= */}
+          <Link href="/" className="flex items-center gap-2">
+            <span className="font-serif text-2xl text-neutral-900">
+              Fit<span className="text-[#b8945c]">Her</span>
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* ================= NAV LINKS ================= */}
+          <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-neutral-700">
+            <Link href="#home" className="hover:text-[#b8945c] transition">
+              Home
+            </Link>
+            <Link href="#about" className="hover:text-[#b8945c] transition">
+              About
+            </Link>
+            <Link href="#program" className="hover:text-[#b8945c] transition">
+              Program
+            </Link>
+            <Link href="#testimonials" className="hover:text-[#b8945c] transition">
+              Success Stories
+            </Link>
+            <Link href="#blog" className="hover:text-[#b8945c] transition">
+              Blog
+            </Link>
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl px-6">
-              <Link href="#contact">Book Free Call</Link>
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            className="md:hidden text-foreground p-2 hover:bg-muted rounded-xl transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+          {/* ================= CTA ================= */}
+          <Button
+            asChild
+            className="hidden md:inline-flex rounded-full bg-[#b8945c] px-6 py-3 text-sm font-medium text-white hover:bg-[#a07f4a]"
           >
-            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
+            <Link href="#contact">
+              Book a Free Consultation
+            </Link>
+          </Button>
 
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-border/50 mt-2">
-            <div className="flex flex-col gap-3">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Button asChild className="mt-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl">
-                <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  Book Free Call
-                </Link>
-              </Button>
-            </div>
-          </nav>
-        )}
+        </div>
       </div>
     </header>
   )

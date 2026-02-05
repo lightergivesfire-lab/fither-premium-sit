@@ -18,101 +18,122 @@ export function LeadMagnet() {
   }
 
   return (
-    <section id="lead-magnet" className="py-28 bg-background relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
-      
-      <div 
+    <section
+      id="lead-magnet"
+      className="relative py-32 bg-[#faf7f2] overflow-hidden"
+    >
+      {/* subtle glow */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(216,194,158,0.22),transparent_60%)]" />
+
+      <div
         ref={ref}
-        className={`relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        className={`relative mx-auto max-w-7xl px-6 transition-all duration-1000 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-card border border-border/50 rounded-3xl p-8 lg:p-14 relative overflow-hidden">
-            {/* Decorative element */}
-            <div className="absolute top-0 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-            
-            <div className="relative z-10 grid lg:grid-cols-2 gap-10 items-center">
-              {/* Content */}
+        <div className="max-w-5xl mx-auto">
+
+          <div className="relative overflow-hidden rounded-[3rem] border border-neutral-300 bg-[#f7f3ed] p-10 lg:p-16 shadow-sm">
+
+            {/* accent orb */}
+            <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[#e6d6bb] blur-3xl" />
+
+            <div className="relative grid lg:grid-cols-2 gap-14 items-center">
+
+              {/* ================= CONTENT ================= */}
               <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8">
-                  <BookOpen className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-medium text-primary">Free Guide</span>
+
+                <div className="mb-8 inline-flex items-center gap-2 rounded-full bg-[#efe4d3] px-5 py-2 text-sm text-[#8c6b3f] border border-[#e0cfb4]">
+                  <BookOpen className="h-4 w-4" />
+                  Free Guide
                 </div>
-                
-                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-5 text-balance">
-                  5 Weight Loss Mistakes Women 30+ Make
+
+                <h2 className="font-serif text-3xl md:text-4xl leading-tight text-neutral-900 mb-4">
+                  5 Weight-Loss Mistakes Women 30+ Make
                 </h2>
-                <p className="text-muted-foreground mb-8">
-                  (And How to Fix Them)
+
+                <p className="text-neutral-600 mb-10">
+                  (And exactly how to fix them using science-backed systems.)
                 </p>
-                
-                <ul className="space-y-4">
+
+                <ul className="space-y-5">
                   {[
                     "Why your diet keeps failing",
-                    "The hormone connection you're missing",
-                    "Simple swaps that actually work",
+                    "The hormone connection you’re missing",
+                    "Simple Indian-meal swaps that work",
                     "The #1 exercise mistake",
-                    "How to stay consistent"
+                    "How to stay consistent long-term",
                   ].map((item, index) => (
-                    <li key={index} className="flex items-center gap-3 text-sm text-muted-foreground">
-                      <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                      <span>{item}</span>
+                    <li
+                      key={index}
+                      className="flex items-start gap-3 text-sm text-neutral-700"
+                    >
+                      <CheckCircle className="h-5 w-5 text-[#b8945c] mt-0.5" />
+                      {item}
                     </li>
                   ))}
                 </ul>
+
               </div>
-              
-              {/* Form */}
+
+              {/* ================= FORM ================= */}
               <div>
+
                 {!isSubmitted ? (
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div>
-                      <Input
-                        type="text"
-                        placeholder="Your Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        className="bg-muted/50 border-border/50 text-foreground placeholder:text-muted-foreground rounded-xl h-12"
-                      />
-                    </div>
-                    <div>
-                      <Input
-                        type="email"
-                        placeholder="Your Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="bg-muted/50 border-border/50 text-foreground placeholder:text-muted-foreground rounded-xl h-12"
-                      />
-                    </div>
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 h-auto text-base rounded-xl"
+                  <form
+                    onSubmit={handleSubmit}
+                    className="rounded-3xl bg-white/90 p-8 border border-neutral-300 shadow-sm space-y-5"
+                  >
+                    <Input
+                      type="text"
+                      placeholder="Your Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      className="h-12 rounded-xl border-neutral-300 bg-[#faf7f2]"
+                    />
+
+                    <Input
+                      type="email"
+                      placeholder="Your Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="h-12 rounded-xl border-neutral-300 bg-[#faf7f2]"
+                    />
+
+                    <Button
+                      type="submit"
+                      className="w-full rounded-full bg-[#b8945c] py-6 h-auto text-white hover:bg-[#a07f4a]"
                     >
-                      <Download className="w-4 h-4 mr-2" />
-                      Download Now — Free
+                      <Download className="h-4 w-4 mr-2" />
+                      Download Free Guide
                     </Button>
-                    <p className="text-xs text-center text-muted-foreground">
-                      {"We respect your privacy. Unsubscribe anytime."}
+
+                    <p className="text-xs text-center text-neutral-500">
+                      We respect your privacy. Unsubscribe anytime.
                     </p>
                   </form>
                 ) : (
-                  <div className="text-center p-10 bg-primary/10 rounded-2xl">
-                    <CheckCircle className="w-16 h-16 text-primary mx-auto mb-5" />
-                    <h3 className="font-semibold text-foreground text-xl mb-3">
-                      Check Your Inbox!
+                  <div className="rounded-3xl bg-white/90 border border-neutral-300 p-10 text-center shadow-sm">
+                    <CheckCircle className="h-14 w-14 text-[#b8945c] mx-auto mb-6" />
+
+                    <h3 className="font-medium text-neutral-900 text-xl mb-3">
+                      Check Your Inbox
                     </h3>
-                    <p className="text-muted-foreground text-sm">
-                      {"Your free guide is on its way. Don't forget to check your spam folder!"}
+
+                    <p className="text-neutral-600 text-sm">
+                      Your free guide is on its way. Please check spam or
+                      promotions if you don’t see it.
                     </p>
                   </div>
                 )}
+
               </div>
+
             </div>
           </div>
+
         </div>
       </div>
     </section>

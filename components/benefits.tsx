@@ -1,91 +1,114 @@
 "use client"
 
-import { Scale, Zap, Heart, Moon, CalendarCheck } from "lucide-react"
+import { Scale, Zap, Heart, Moon, CalendarCheck, ArrowRight } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 const benefits = [
   {
     icon: Scale,
-    title: "4-10 kg Fat Loss",
-    description: "Sustainably, without crash diets or extreme measures"
+    title: "4–10 kg Fat Loss",
+    description: "Sustainable results without crash dieting or extreme restrictions.",
   },
   {
     icon: Zap,
     title: "All-Day Energy",
-    description: "Energy levels that last from morning to night"
+    description: "Stable energy levels from morning to night without burnout.",
   },
   {
     icon: Heart,
-    title: "Hormonal Harmony",
-    description: "Support for thyroid, PCOS, and menopause symptoms"
+    title: "Hormonal Balance",
+    description: "Support for thyroid, PCOS, and menopause-related symptoms.",
   },
   {
     icon: Moon,
     title: "Peaceful Sleep",
-    description: "Better rest and stress mastery techniques"
+    description: "Deeper rest paired with stress-regulation systems.",
   },
   {
     icon: CalendarCheck,
-    title: "Sustainable Lifestyle",
-    description: "A routine you can stick to, even when life gets busy"
-  }
+    title: "A Sustainable Lifestyle",
+    description: "Routines that fit busy lives and last long after coaching ends.",
+  },
 ]
 
 export function Benefits() {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>()
 
   return (
-    <section id="benefits" className="py-28 bg-secondary/20">
-      <div 
+    <section
+      id="benefits"
+      className="relative py-32 bg-[#faf7f2]"
+    >
+      {/* subtle glow */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(216,194,158,0.2),transparent_60%)]" />
+
+      <div
         ref={ref}
-        className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        className={`relative mx-auto max-w-7xl px-6 transition-all duration-1000 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <p className="text-primary font-medium mb-4 tracking-widest uppercase text-sm">Your Transformation</p>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-            {"What You'll Walk Away With"}
+        {/* ================= HEADER ================= */}
+        <div className="text-center max-w-3xl mx-auto mb-24">
+          <span className="uppercase tracking-wide text-xs text-[#b8945c]">
+            Your Transformation
+          </span>
+
+          <h2 className="font-serif text-4xl md:text-5xl leading-[1.15] mt-4 mb-6 text-neutral-900">
+            What You’ll Walk Away With
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty">
-            Real, lasting changes that transform not just your body, but your entire life
+
+          <p className="text-neutral-600 text-lg">
+            Real, lasting changes that reshape not just your body —
+            but your energy, confidence, and lifestyle.
           </p>
         </div>
 
-        {/* Benefits Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        {/* ================= BENEFITS GRID ================= */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
+
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className={`relative group transition-all duration-700 ${
+              className={`transition-all duration-700 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              style={{ transitionDelay: `${index * 90}ms` }}
             >
-              <div className="bg-card border border-border/50 rounded-2xl p-7 h-full hover:border-primary/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/5">
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
-                  <benefit.icon className="w-8 h-8 text-primary" />
+              <div className="h-full rounded-3xl border border-neutral-200 bg-white/85 backdrop-blur p-8 shadow-sm hover:shadow-md transition">
+
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#efe4d3]">
+                  <benefit.icon className="h-8 w-8 text-[#b8945c]" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-3 text-lg">{benefit.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
+
+                <h3 className="mb-3 text-lg font-semibold text-neutral-900">
+                  {benefit.title}
+                </h3>
+
+                <p className="text-sm text-neutral-600 leading-relaxed">
+                  {benefit.description}
+                </p>
+
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-20 text-center">
-          <p className="text-muted-foreground mb-5">Ready to experience these transformations?</p>
-          <a 
-            href="#contact" 
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group"
+        {/* ================= CTA ================= */}
+        <div className="mt-24 text-center">
+
+          <p className="text-neutral-600 mb-6">
+            Ready to experience these transformations?
+          </p>
+
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 rounded-full border border-[#b8945c] px-8 py-4 text-[#b8945c] font-medium hover:bg-[#b8945c]/10 transition"
           >
             Start Your Journey Today
-            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+            <ArrowRight className="h-4 w-4" />
           </a>
+
         </div>
       </div>
     </section>
