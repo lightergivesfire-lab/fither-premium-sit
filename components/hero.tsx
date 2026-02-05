@@ -15,6 +15,16 @@ export function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(200,176,135,0.22),transparent_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(220,200,170,0.26),transparent_60%)]" />
 
+      {/* ================= MOBILE BACKGROUND IMAGE ================= */}
+      <div className="absolute inset-0 lg:hidden pointer-events-none">
+        <img
+          src="/hero-coach.jpg"
+          alt=""
+          className="w-full h-full object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-[#f4efe6]/80" />
+      </div>
+
       {/* ================= FLORAL OVERLAYS ================= */}
       <img
         src="/floral-soft.png"
@@ -86,7 +96,7 @@ export function Hero() {
           </div>
 
           {/* ================= RIGHT IMAGE ================= */}
-          <div className="relative mt-10 lg:mt-0">
+          <div className="relative mt-10 lg:mt-0 hidden lg:block">
 
             {/* soft card backdrop */}
             <div className="absolute -inset-4 sm:-inset-6 rounded-[2.5rem] sm:rounded-[3.5rem] bg-[#eadcc5]" />
