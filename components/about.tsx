@@ -12,7 +12,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="relative py-32 bg-[#f3f4f6]"
+      className="relative py-20 sm:py-28 lg:py-32 bg-[#eceef1]"
     >
       <div
         ref={ref}
@@ -20,41 +20,45 @@ export function About() {
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
 
           {/* ================= IMAGE ================= */}
-          <div className="relative">
+            <div className="relative max-w-md mx-auto lg:max-w-none">
 
-            {/* darker prestige backdrop */}
-            <div className="absolute -inset-6 rounded-[2.5rem] bg-[#2a2a2a]" />
+  {/* backdrop */}
+  <div className="absolute -inset-4 sm:-inset-6 rounded-[2.2rem] sm:rounded-[2.5rem] bg-[#262626] opacity-90" />
 
-            <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl">
-              <Image
-                src="/coach.jpg"
-                alt="Karan Sharma — Founder & Lead Coach at FitHer"
-                fill
-                className="object-cover object-top"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
-          </div>
+  {/* image container */}
+  <div className="relative z-10 w-full overflow-hidden rounded-[1.8rem] sm:rounded-[2rem] shadow-2xl">
+
+    <Image
+      src="/coach.jpg"
+      alt="Karan Sharma — Founder & Lead Coach at FitHer"
+      width={500}
+      height={700}
+      priority
+      className="w-full h-auto object-cover object-top"
+    />
+
+  </div>
+</div>
 
           {/* ================= TEXT ================= */}
-          <div className="space-y-9">
+          <div className="space-y-7 sm:space-y-9 text-center lg:text-left">
 
-            <span className="uppercase tracking-wide text-xs text-[#8c6b3f] font-semibold">
+            <span className="uppercase tracking-wide text-[11px] sm:text-xs text-[#8c6b3f] font-semibold">
               Founder & Lead Coach
             </span>
 
-            <h2 className="font-serif text-4xl md:text-5xl leading-[1.12] text-neutral-900">
+            <h2 className="font-serif text-[2rem] sm:text-[2.4rem] md:text-5xl leading-[1.15] text-neutral-900">
               Karan Sharma
               <span className="block text-[#8c6b3f]">
                 15+ Years Transforming Women’s Health
               </span>
             </h2>
 
-            <div className="space-y-5 text-neutral-700 leading-relaxed max-w-xl">
-              <p className="text-lg">
+            <div className="space-y-4 sm:space-y-5 text-neutral-700 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-base sm:text-lg">
                 I help busy women 30+ regain control over their bodies, hormones,
                 and energy levels through disciplined systems — not crash diets
                 or unsustainable routines.
@@ -68,7 +72,7 @@ export function About() {
             </div>
 
             {/* credibility */}
-            <div className="grid sm:grid-cols-3 gap-5 pt-6">
+            <div className="grid sm:grid-cols-3 gap-4 sm:gap-5 pt-4 sm:pt-6">
 
               {[
                 {
@@ -89,10 +93,9 @@ export function About() {
               ].map(({ icon: Icon, title, sub }) => (
                 <div
                   key={title}
-                  className="flex items-center gap-4 rounded-3xl bg-[#1f1f1f] px-6 py-5 shadow-xl border border-neutral-800"
+                  className="flex items-center justify-center lg:justify-start gap-4 rounded-3xl bg-[#1f1f1f] px-5 py-4 shadow-xl border border-neutral-800"
                 >
-
-                 <Icon className="h-7 w-7 text-[#d1b27a]" />
+                  <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-[#d1b27a]" />
                   <div>
                     <p className="text-sm font-semibold text-white">
                       {title}
@@ -105,16 +108,18 @@ export function About() {
               ))}
             </div>
 
-            <Button
-              asChild
-              size="lg"
-              className="rounded-full bg-[#8c6b3f] px-10 py-6 h-auto text-white hover:bg-[#735531]"
-            >
-              <Link href="#contact" className="flex items-center gap-2">
-                Book a Discovery Call
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
+            <div className="flex justify-center lg:justify-start">
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full bg-[#8c6b3f] px-9 sm:px-10 py-5 sm:py-6 h-auto text-white hover:bg-[#735531]"
+              >
+                <Link href="#contact" className="flex items-center gap-2">
+                  Book a Discovery Call
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            </div>
 
           </div>
         </div>

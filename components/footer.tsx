@@ -21,35 +21,35 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative bg-[#f6f2ec] border-t border-neutral-300">
+    <footer className="relative bg-[#f4efe8] border-t border-neutral-300">
 
       {/* subtle glow */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_center,_rgba(216,194,158,0.18),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_center,_rgba(200,180,140,0.16),transparent_60%)]" />
 
       <div className="relative mx-auto max-w-7xl px-6">
 
         {/* ================= MAIN FOOTER ================= */}
-        <div className="grid gap-12 py-20 md:grid-cols-3 items-center">
+        <div className="grid gap-10 py-14 sm:py-20 md:grid-cols-3 items-center">
 
           {/* Logo */}
-          <div>
+          <div className="text-center md:text-left">
             <Link href="/" className="inline-block mb-4">
               <Image
                 src="/logo.jpeg"
                 alt="FitHer Studio — Strong · Balanced · Unstoppable"
                 width={150}
                 height={60}
-                className="h-12 w-auto object-contain rounded-md"
+                className="h-11 sm:h-12 w-auto object-contain rounded-md"
               />
             </Link>
 
-            <p className="max-w-xs text-sm text-neutral-600">
+            <p className="max-w-xs mx-auto md:mx-0 text-sm text-neutral-600">
               Transform your body, energy, and hormones — the FitHer™ way.
             </p>
           </div>
 
           {/* Links */}
-          <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 text-sm">
+          <div className="flex flex-wrap justify-center gap-x-8 sm:gap-x-10 gap-y-3 sm:gap-y-4 text-sm">
             {footerLinks.map((link) => (
               <Link
                 key={link.href}
@@ -62,7 +62,7 @@ export function Footer() {
           </div>
 
           {/* Social */}
-          <div className="flex justify-center md:justify-end gap-4">
+          <div className="flex justify-center md:justify-end gap-3 sm:gap-4">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
@@ -70,9 +70,9 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-300 bg-white/80 text-[#8c6b3f] hover:bg-[#b8945c] hover:text-white transition"
+                className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-neutral-300 bg-white/80 text-[#8c6b3f] hover:bg-[#b8945c] hover:text-white transition"
               >
-                <social.icon className="h-5 w-5" />
+                <social.icon className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
             ))}
           </div>
@@ -80,13 +80,13 @@ export function Footer() {
         </div>
 
         {/* ================= BOTTOM BAR ================= */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-neutral-300 py-8 text-sm text-neutral-500">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-neutral-300 py-6 sm:py-8 text-xs sm:text-sm text-neutral-500">
 
-          <p>
+          <p className="text-center sm:text-left">
             © {new Date().getFullYear()} FitHer Studio. All rights reserved.
           </p>
 
-          <div className="flex gap-8">
+          <div className="flex gap-6 sm:gap-8">
             <Link
               href="#"
               className="hover:text-[#b8945c] transition"

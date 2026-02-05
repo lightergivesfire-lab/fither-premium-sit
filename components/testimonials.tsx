@@ -45,10 +45,10 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative py-32 bg-[#f6f2ec]"
+      className="relative py-20 sm:py-28 lg:py-32 bg-[#f4efe8]"
     >
-      {/* subtle background glow */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(216,194,158,0.18),transparent_60%)]" />
+      {/* subtle glow */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(200,180,140,0.16),transparent_60%)]" />
 
       <div
         ref={ref}
@@ -57,38 +57,41 @@ export function Testimonials() {
         }`}
       >
         {/* ================= HEADER ================= */}
-        <div className="text-center max-w-3xl mx-auto mb-24">
-          <span className="uppercase tracking-wide text-xs text-[#b8945c]">
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
+
+          <span className="uppercase tracking-wide text-[11px] sm:text-xs text-[#b8945c]">
             Success Stories
           </span>
 
-          <h2 className="font-serif text-4xl md:text-5xl leading-[1.15] mt-4 mb-6 text-neutral-900">
+          <h2 className="font-serif text-[2rem] sm:text-[2.4rem] md:text-5xl leading-[1.15] mt-3 mb-4 sm:mb-6 text-neutral-900">
             Real Women, Real Results
           </h2>
 
-          <p className="text-neutral-600 text-lg">
+          <p className="text-neutral-600 text-base sm:text-lg">
             Join hundreds of women who’ve transformed their health with FitHer.
           </p>
+
         </div>
 
         {/* ================= TESTIMONIALS GRID ================= */}
-        <div className="grid md:grid-cols-2 gap-8 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-16 sm:mb-24">
+
           {testimonials.map((testimonial, index) => (
             <Card
               key={index}
               className={`rounded-3xl border border-neutral-200 bg-white/90 backdrop-blur shadow-sm transition-all duration-500 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
-              style={{ transitionDelay: `${index * 90}ms` }}
+              style={{ transitionDelay: `${index * 80}ms` }}
             >
-              <CardContent className="p-9">
+              <CardContent className="p-6 sm:p-9">
 
                 {/* top row */}
-                <div className="flex items-start justify-between gap-4 mb-6">
+                <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
 
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#efe4d3]">
-                      <span className="font-serif text-lg text-[#b8945c]">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#efe4d3]">
+                      <span className="font-serif text-base sm:text-lg text-[#b8945c]">
                         {testimonial.name
                           .split(" ")
                           .map((n) => n[0])
@@ -106,13 +109,14 @@ export function Testimonials() {
                     </div>
                   </div>
 
-                  <span className="rounded-full bg-[#efe4d3] px-4 py-1.5 text-xs font-medium text-[#8c6b3f]">
+                  <span className="rounded-full bg-[#efe4d3] px-3 sm:px-4 py-1.5 text-[11px] sm:text-xs font-medium text-[#8c6b3f]">
                     {testimonial.result}
                   </span>
+
                 </div>
 
                 {/* stars */}
-                <div className="mb-5 flex gap-1">
+                <div className="mb-4 sm:mb-5 flex gap-1">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
                     <Star
                       key={i}
@@ -122,9 +126,9 @@ export function Testimonials() {
                 </div>
 
                 {/* quote */}
-                <div className="relative pl-8">
-                  <Quote className="absolute left-0 top-0 h-7 w-7 text-[#b8945c]/20" />
-                  <p className="text-neutral-600 leading-relaxed">
+                <div className="relative pl-7 sm:pl-8">
+                  <Quote className="absolute left-0 top-0 h-6 w-6 sm:h-7 sm:w-7 text-[#b8945c]/20" />
+                  <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
                     {testimonial.quote}
                   </p>
                 </div>
@@ -132,10 +136,12 @@ export function Testimonials() {
               </CardContent>
             </Card>
           ))}
+
         </div>
 
         {/* ================= STATS ================= */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+
           {[
             { value: "500+", label: "Women Transformed" },
             { value: "4.9/5", label: "Average Rating" },
@@ -144,19 +150,20 @@ export function Testimonials() {
           ].map((stat, index) => (
             <div
               key={index}
-              className={`rounded-3xl border border-neutral-200 bg-white/90 p-8 text-center shadow-sm transition-all duration-500 ${
+              className={`rounded-3xl border border-neutral-200 bg-white/90 p-5 sm:p-8 text-center shadow-sm transition-all duration-500 ${
                 isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
-              style={{ transitionDelay: `${400 + index * 90}ms` }}
+              style={{ transitionDelay: `${350 + index * 80}ms` }}
             >
-              <p className="mb-2 text-4xl font-semibold text-[#b8945c]">
+              <p className="mb-1 sm:mb-2 text-3xl sm:text-4xl font-semibold text-[#b8945c]">
                 {stat.value}
               </p>
-              <p className="text-sm text-neutral-600">
+              <p className="text-xs sm:text-sm text-neutral-600">
                 {stat.label}
               </p>
             </div>
           ))}
+
         </div>
 
       </div>
