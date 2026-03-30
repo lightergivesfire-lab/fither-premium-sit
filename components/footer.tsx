@@ -55,7 +55,7 @@ export function Footer() {
 
             {/* WhatsApp */}
             <a
-              href="https://wa.me/91XXXXXXXXXX"
+              href="https://wa.me/8586916398?text=Hi!%20I%27m%20interested%20in%20the%20FitHer%20program."
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-white hover:bg-[#25D366] transition"
@@ -65,7 +65,7 @@ export function Footer() {
 
             {/* Instagram */}
             <a
-              href="https://instagram.com/YOUR_USERNAME"
+              href="https://instagram.com/Karan_fitindia"
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:via-red-500 hover:to-yellow-500 transition"

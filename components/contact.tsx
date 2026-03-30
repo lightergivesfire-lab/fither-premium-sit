@@ -25,7 +25,7 @@ export function Contact() {
 
           {/* WHATSAPP (PRIMARY) */}
           <a
-            href="https://wa.me/91XXXXXXXXXX?text=Hi%20I%20want%20to%20know%20more%20about%20your%20program"
+            href="https://wa.me/8586916398?text=Hi!%20I%27m%20interested%20in%20the%20FitHer%20program."
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 rounded-full px-8 py-4 text-sm font-medium bg-[#25D366] text-white hover:opacity-90 transition hover:scale-[1.03]"
@@ -36,13 +36,13 @@ export function Contact() {
 
           {/* INSTAGRAM (SECONDARY) */}
           <a
-  href="https://instagram.com/YOUR_USERNAME"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="group inline-flex items-center gap-3 rounded-full px-7 py-3 text-sm font-medium text-white 
-  bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 
-  hover:opacity-90 transition hover:scale-[1.03]"
->
+         href="https://instagram.com/Karan_fitindia"
+        target="_blank"
+        rel="noopener noreferrer"
+          className="group inline-flex items-center gap-3 rounded-full px-7 py-3 text-sm font-medium text-white 
+         bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 
+        hover:opacity-90 transition hover:scale-[1.03]"
+       >
   <Instagram className="w-4 h-4" />
   Follow on Instagram
 </a>
