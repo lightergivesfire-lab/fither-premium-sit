@@ -1,214 +1,118 @@
 "use client"
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import {
-  Dumbbell,
-  UtensilsCrossed,
-  Brain,
-  Video,
-  Users,
-  Clock,
-  ArrowRight,
-  CheckCircle,
-} from "lucide-react"
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { useEffect, useState } from "react"
+import Image from "next/image"
 
-const features = [
-  {
-    icon: Dumbbell,
-    title: "Personalized 12-Week Workout Plan",
-    description: "15–30 min/day workouts designed for busy schedules",
-  },
-  {
-    icon: UtensilsCrossed,
-    title: "Easy Indian Meal Plans",
-    description: "Veg/Non-Veg, gluten-free, thyroid-friendly options",
-  },
-  {
-    icon: Brain,
-    title: "Hormone & Stress Reset Tools",
-    description: "Science-backed techniques for hormonal balance",
-  },
-  {
-    icon: Video,
-    title: "Bi-weekly 1:1 Coaching Calls",
-    description: "Personal guidance and accountability sessions",
-  },
-  {
-    icon: Users,
-    title: "Private WhatsApp Group",
-    description: "Community support and daily motivation",
-  },
-  {
-    icon: Clock,
-    title: "Sleep, Gut & Time Framework",
-    description: "Holistic approach to wellness management",
-  },
+const images = [
+  "/program1.png",
+  "/program2.png",
+  "/program3.png",
 ]
 
 export function Program() {
-  const { ref, isVisible } = useScrollAnimation<HTMLElement>()
+  const [index, setIndex] = useState(0)
+
+  // 🔥 AUTO PLAY
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length)
+    }, 3500)
+
+    return () => clearInterval(interval)
+  }, [])
 
   return (
-    <section
-      id="program"
-      className="relative py-20 sm:py-28 lg:py-32 bg-[#ede8df]"
-    >
-      {/* subtle glow */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(200,180,140,0.18),transparent_60%)]" />
+    <section id="program" className="bg-background py-6 scroll-mt-24">
+      <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-10 items-center">
 
-      <div
-        ref={ref}
-        className={`relative mx-auto max-w-7xl px-6 transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
-      >
-        {/* ================= HEADER ================= */}
-        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
+        {/* ================= LEFT: STACKED GALLERY ================= */}
+        <div className="relative h-[360px] pb-8">
 
-          <span className="uppercase tracking-wide text-[11px] sm:text-xs text-[#b8945c]">
-            Signature Program
-          </span>
+          {images.map((src, i) => {
+            const isActive = i === index
 
-          <h2 className="font-serif text-[2rem] sm:text-[2.4rem] md:text-5xl leading-[1.15] mt-3 mb-5 text-neutral-900">
-            The FitHer™ Lifestyle Lean Method
-          </h2>
+            return (
+              <div
+                key={i}
+                className={`absolute inset-0 transition-all duration-700 ${
+                  isActive
+                    ? "z-30 opacity-100 scale-100 rotate-0"
+                    : "z-10 opacity-40 scale-95 rotate-[-4deg]"
+                }`}
+              >
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  className="object-cover rounded-xl shadow-lg"
+                />
+              </div>
+            )
+          })}
 
-          <p className="text-neutral-600 text-base sm:text-lg">
-            A 90-day private coaching system for women who want real results
-            without burnout.
+          {/* 🔥 DOT CONTROLS */}
+          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
+
+            {images.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === index
+                    ? "w-6 bg-foreground"
+                    : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground"
+                }`}
+              />
+            ))}
+
+          </div>
+        </div>
+
+        {/* ================= RIGHT: TEXT ================= */}
+        <div>
+
+          <p className="text-sm text-muted-foreground tracking-tight mb-2">
+            The FitHer Method
           </p>
 
-        </div>
+          <h2 className="font-serif text-3xl sm:text-4xl tracking-tight leading-tight text-foreground">
+            A system built for
+            <span className="block">
+              real women with real lives
+            </span>
+          </h2>
 
-        {/* ================= FEATURES ================= */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 mb-16 sm:mb-24">
+          <div className="mt-8 space-y-8">
 
-          {features.map((feature, index) => (
-            <Card
-              key={index}
-              className={`bg-[#fbfaf8] border border-neutral-300 rounded-3xl shadow-sm transition-all duration-500 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${index * 80}ms` }}
-            >
-              <CardContent className="p-6 sm:p-8">
-
-                <div className="mb-5 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#e2d6c3]">
-                  <feature.icon className="h-6 w-6 sm:h-7 sm:w-7 text-[#b8945c]" />
-                </div>
-
-                <h3 className="text-base sm:text-lg font-semibold mb-2 text-neutral-900">
-                  {feature.title}
-                </h3>
-
-                <p className="text-sm text-neutral-600 leading-relaxed">
-                  {feature.description}
-                </p>
-
-              </CardContent>
-            </Card>
-          ))}
-
-        </div>
-
-        {/* ================= OFFER PANEL ================= */}
-        <div className="rounded-[2.5rem] sm:rounded-[3rem] border border-neutral-300 bg-[#f6f2ec] p-6 sm:p-10 lg:p-16 shadow-sm">
-
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-
-            {/* LEFT */}
-            <div>
-
-              <h3 className="font-serif text-[1.6rem] sm:text-3xl mb-6 sm:mb-10 text-neutral-900">
-                What’s Included in Your 90-Day Transformation
-              </h3>
-
-              <ul className="space-y-4 sm:space-y-6">
-                {[
-                  "Personalized fitness assessment & goal setting",
-                  "Custom Indian meal plans",
-                  "Weekly check-ins and progress tracking",
-                  "Private workout library access",
-                  "Mindset & stress systems",
-                  "Lifetime access to materials",
-                ].map((item, i) => (
-                  <li key={i} className="flex gap-3 sm:gap-4">
-
-                    <CheckCircle className="h-5 w-5 text-[#b8945c] mt-0.5" />
-
-                    <span className="text-sm sm:text-base text-neutral-700">
-                      {item}
-                    </span>
-
-                  </li>
-                ))}
-              </ul>
-
+            {/* STEP 1 */}
+            <div className="flex gap-5">
+              <span className="text-muted-foreground/40">01</span>
+              <p className="text-muted-foreground max-w-md">
+                We start by understanding your routine, stress, and lifestyle — not just your weight.
+              </p>
             </div>
 
-            {/* RIGHT / PRICE */}
-            <div className="rounded-3xl bg-[#ebe3d8] p-6 sm:p-10 text-center border border-neutral-300">
-
-              <p className="text-[11px] sm:text-xs tracking-wide uppercase text-neutral-500 mb-3">
-                Investment in Yourself
+            {/* STEP 2 */}
+            <div className="flex gap-5">
+              <span className="text-muted-foreground/40">02</span>
+              <p className="text-muted-foreground max-w-md">
+                Your plan is built around your life, not against it — simple, realistic, and sustainable.
               </p>
+            </div>
 
-              <div className="mb-5 sm:mb-6">
-
-                <span className="text-4xl sm:text-5xl font-semibold text-neutral-900">
-                  ₹24,999
-                </span>
-
-                <span className="ml-2 sm:ml-3 text-neutral-500 line-through text-base sm:text-lg">
-                  ₹39,999
-                </span>
-
-              </div>
-
-              <p className="text-xs sm:text-sm text-[#b8945c] mb-6 sm:mb-8 font-medium">
-                Limited-time offer — Save ₹15,000
+            {/* STEP 3 */}
+            <div className="flex gap-5">
+              <span className="text-muted-foreground/40">03</span>
+              <p className="text-muted-foreground max-w-md">
+                You stay consistent with guidance and support — no burnout, no confusion.
               </p>
-
-              <div className="space-y-3 sm:space-y-4">
-
-                <Button
-                  asChild
-                  className="w-full rounded-full bg-[#b8945c] text-white py-5 sm:py-6 h-auto text-base hover:bg-[#a07f4a]"
-                >
-                  <Link
-                    href="#contact"
-                    className="flex items-center justify-center gap-2"
-                  >
-                    Join the Program
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
-
-                <Button
-                  asChild
-                  variant="outline"
-                  className="w-full rounded-full border-[#b8945c] text-[#b8945c] py-5 sm:py-6 h-auto hover:bg-[#b8945c]/10"
-                >
-                  <Link href="#contact">
-                    Book a Free Discovery Call
-                  </Link>
-                </Button>
-
-              </div>
-
-              <p className="mt-5 sm:mt-6 text-xs text-neutral-500">
-                EMI options available
-              </p>
-
             </div>
 
           </div>
+
         </div>
 
       </div>
     </section>
   )
-}
+}   

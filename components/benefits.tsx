@@ -1,116 +1,173 @@
 "use client"
 
-import { Scale, Zap, Heart, Moon, CalendarCheck, ArrowRight } from "lucide-react"
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { Scale, Zap, Heart, Moon, CalendarCheck } from "lucide-react"
+import { useState } from "react"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 const benefits = [
   {
     icon: Scale,
     title: "4–10 kg Fat Loss",
-    description: "Sustainable results without crash dieting or extreme restrictions.",
+    desc: "Without extreme dieting or restriction",
   },
   {
     icon: Zap,
-    title: "All-Day Energy",
-    description: "Stable energy levels from morning to night without burnout.",
+    title: "All-day Energy",
+    desc: "No crashes, no burnout",
   },
   {
     icon: Heart,
     title: "Hormonal Balance",
-    description: "Support for thyroid, PCOS, and menopause-related symptoms.",
+    desc: "PCOS, thyroid & menopause support",
   },
   {
     icon: Moon,
-    title: "Peaceful Sleep",
-    description: "Deeper rest paired with stress-regulation systems.",
+    title: "Better Sleep",
+    desc: "Deeper rest, lower stress",
   },
   {
     icon: CalendarCheck,
-    title: "A Sustainable Lifestyle",
-    description: "Routines that fit busy lives and last long after coaching ends.",
+    title: "Sustainable Lifestyle",
+    desc: "Fits your real routine",
   },
 ]
 
 export function Benefits() {
-  const { ref, isVisible } = useScrollAnimation<HTMLElement>()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitted(true)
+  }
 
   return (
-    <section
-      id="benefits"
-      className="relative py-20 sm:py-28 lg:py-32 bg-[#f6f2ec]"
-    >
-      {/* subtle glow */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(200,180,140,0.18),transparent_60%)]" />
+    <section id="benefits" className="bg-background py-8 scroll-mt-24">
+      <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
 
-      <div
-        ref={ref}
-        className={`relative mx-auto max-w-7xl px-6 transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
-      >
-        {/* ================= HEADER ================= */}
-        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
+        {/* ================= LEFT ================= */}
+        <div>
 
-          <span className="uppercase tracking-wide text-[11px] sm:text-xs text-[#b8945c]">
-            Your Transformation
-          </span>
+          {/* HEADER */}
+          <div className="mb-12">
+            <p className="text-sm text-muted-foreground mb-2">
+              Your Transformation
+            </p>
 
-          <h2 className="font-serif text-[2rem] sm:text-[2.4rem] md:text-5xl leading-[1.15] mt-3 mb-4 sm:mb-6 text-neutral-900">
-            What You’ll Walk Away With
-          </h2>
+            <h2 className="font-serif text-3xl sm:text-4xl leading-tight text-foreground max-w-xl">
+              What actually changes
+              <span className="block">when you follow the system</span>
+            </h2>
+          </div>
 
-          <p className="text-neutral-600 text-base sm:text-lg">
-            Real, lasting changes that reshape not just your body —
-            but your energy, confidence, and lifestyle.
-          </p>
+          {/* FLOW */}
+          <div className="relative">
+            <div className="absolute left-5 top-0 bottom-0 w-px bg-border" />
+
+            <div className="space-y-10">
+              {benefits.map((b, i) => (
+                <div key={i} className="flex items-start gap-5 group">
+
+                  <div className="z-10 flex h-9 w-9 items-center justify-center rounded-full bg-background border border-border">
+                    <b.icon className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition" />
+                  </div>
+
+                  <div>
+                    <h3 className="text-[15px] font-medium text-foreground">
+                      {b.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {b.desc}
+                    </p>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* RESULT */}
+          <div className="mt-14 border-t border-border pt-8">
+            <p className="text-sm text-muted-foreground">
+              Most clients experience
+            </p>
+
+            <p className="text-3xl font-semibold text-foreground mt-2">
+              6–8 kg fat loss
+            </p>
+
+            <p className="text-sm text-muted-foreground mt-1">
+              within 12–16 weeks — without extreme routines
+            </p>
+          </div>
 
         </div>
 
-        {/* ================= BENEFITS GRID ================= */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 sm:gap-8">
+        {/* ================= RIGHT ================= */}
+        <div className="relative flex justify-center lg:justify-end">
 
-          {benefits.map((benefit, index) => (
-            <div
-              key={index}
-              className={`transition-all duration-700 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: `${index * 80}ms` }}
-            >
-              <div className="h-full rounded-3xl border border-neutral-200 bg-white/85 backdrop-blur p-6 sm:p-8 shadow-sm hover:shadow-md transition">
+          {/* glow */}
+          <div className="absolute -inset-6 bg-primary/10 blur-2xl rounded-2xl" />
 
-                <div className="mb-5 flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-[#efe4d3]">
-                  <benefit.icon className="h-6 w-6 sm:h-8 sm:w-8 text-[#b8945c]" />
-                </div>
+          <div className="relative border border-border rounded-2xl p-6 sm:p-8 bg-card w-full max-w-sm text-center mx-auto lg:mx-0 hover:scale-[1.02] transition">
 
-                <h3 className="mb-2 sm:mb-3 text-base sm:text-lg font-semibold text-neutral-900">
-                  {benefit.title}
-                </h3>
+            {/* FREE TAG */}
+            <p className="text-xs font-medium text-primary mb-3">
+              FREE GUIDE
+            </p>
 
-                <p className="text-sm text-neutral-600 leading-relaxed">
-                  {benefit.description}
+            {/* HEADLINE */}
+            <h3 className="text-lg sm:text-xl font-semibold text-foreground leading-snug">
+              5 Mistakes Stopping
+              <span className="block text-primary">
+                Your Fat Loss
+              </span>
+            </h3>
+
+            {/* SUBTEXT */}
+            <p className="text-xs text-muted-foreground mt-2 mb-5">
+              Simple fixes. Real results.
+            </p>
+
+            {/* FORM */}
+            {!submitted ? (
+              <form onSubmit={handleSubmit} className="space-y-3">
+
+                <Input
+                  placeholder="Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="bg-background border-border text-sm"
+                />
+
+                <Input
+                  type="email"
+                  placeholder="Your Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="bg-background border-border text-sm"
+                />
+
+                <Button className="w-full rounded-full py-4 text-sm font-medium bg-primary text-primary-foreground">
+                  Get Free Guide →
+                </Button>
+
+                <p className="text-[11px] text-muted-foreground">
+                  Instant access • No spam
                 </p>
 
-              </div>
-            </div>
-          ))}
+              </form>
+            ) : (
+              <p className="text-sm text-foreground">
+                Check your inbox — it's sent.
+              </p>
+            )}
 
-        </div>
-
-        {/* ================= CTA ================= */}
-        <div className="mt-16 sm:mt-24 text-center">
-
-          <p className="text-neutral-600 mb-5 sm:mb-6">
-            Ready to experience these transformations?
-          </p>
-
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-[#b8945c] px-7 sm:px-8 py-3.5 sm:py-4 text-[#b8945c] font-medium hover:bg-[#b8945c]/10 transition"
-          >
-            Start Your Journey Today
-            <ArrowRight className="h-4 w-4" />
-          </a>
+          </div>
 
         </div>
 

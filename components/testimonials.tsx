@@ -1,169 +1,207 @@
 "use client"
 
-import { Card, CardContent } from "@/components/ui/card"
-import { Star, Quote } from "lucide-react"
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import Image from "next/image"
+import { useEffect, useRef, useState } from "react"
 
 const testimonials = [
   {
+    image: "/testimonial1.png",
+    text: (
+      <>
+        <span className="italic">
+          Before FitHer, I felt completely{" "}
+          <span className="text-foreground font-medium">
+            stuck with PCOS and constant fatigue
+          </span>.
+          <br /><br />
+          I tried everything — nothing worked.
+          <br /><br />
+          Now I've lost{" "}
+          <span className="text-foreground font-medium">7 kg</span>, my energy is
+          back, and I finally feel{" "}
+          <span className="text-foreground font-medium">
+            in control of my body again
+          </span>.
+        </span>
+      </>
+    ),
     name: "Priya Sharma",
-    role: "Working Mom, 38",
-    quote:
-      "Before FitHer, I was stuck. Now I've lost 7 kg, my PCOS symptoms are under control, and I feel confident again. Karan's approach is so practical for busy moms!",
-    rating: 5,
+    info: "38 • Working Mom",
     result: "Lost 7 kg",
   },
   {
+    image: "/testimonial2.png",
+    text: (
+      <>
+        <span className="italic">
+          This is the first time I stayed consistent{" "}
+          <span className="text-foreground font-medium">
+            without burnout
+          </span>.
+          <br /><br />
+          My energy is stable, my sleep has improved, and I finally feel{" "}
+          <span className="text-foreground font-medium">
+            confident in my routine
+          </span>.
+        </span>
+      </>
+    ),
     name: "Anjali Mehta",
-    role: "IT Professional, 42",
-    quote:
-      "I tried everything for my thyroid weight gain. FitHer was the first program that actually worked. Lost 9 kg in 3 months and my energy is through the roof!",
-    rating: 5,
+    info: "42 • Entrepreneur",
     result: "Lost 9 kg",
   },
   {
-    name: "Deepika Reddy",
-    role: "Homemaker, 35",
-    quote:
-      "The meal plans are so easy to follow with Indian recipes my family loves. I've never felt better — sleeping well, stress-free, and down 2 dress sizes!",
-    rating: 5,
-    result: "2 Dress Sizes Down",
-  },
-  {
-    name: "Kavitha Nair",
-    role: "Business Owner, 45",
-    quote:
-      "Managing menopause symptoms while running a business seemed impossible. FitHer gave me the tools to feel in control again. Best investment ever!",
-    rating: 5,
-    result: "Menopause Relief",
+    image: "/testimonial3.png",
+    text: (
+      <>
+        <span className="italic">
+          I didn't change my whole life — I just followed the system.
+          <br /><br />
+          That helped me become{" "}
+          <span className="text-foreground font-medium">
+            more consistent than ever
+          </span>{" "}
+          and finally build something I can{" "}
+          <span className="text-foreground font-medium">
+            sustain long-term
+          </span>.
+        </span>
+      </>
+    ),
+    name: "Deepika Verma",
+    info: "35 • Working Professional",
+    result: "2 sizes down",
   },
 ]
 
+const INTERVAL = 3500
+
 export function Testimonials() {
-  const { ref, isVisible } = useScrollAnimation<HTMLElement>()
+  const [index, setIndex] = useState(0)
+  const startX = useRef(0)
+  const paused = useRef(false)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (!paused.current) {
+        setIndex((prev) => (prev + 1) % testimonials.length)
+      }
+    }, INTERVAL)
+
+    return () => clearInterval(id)
+  }, [])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = startX.current - e.changedTouches[0].clientX
+    if (diff > 50) setIndex((p) => (p + 1) % testimonials.length)
+    if (diff < -50) setIndex((p) => (p - 1 + testimonials.length) % testimonials.length)
+  }
 
   return (
     <section
       id="testimonials"
-      className="relative py-20 sm:py-28 lg:py-32 bg-[#f4efe8]"
+      className="bg-background py-12 sm:py-16 scroll-mt-24"
+      onMouseEnter={() => (paused.current = true)}
+      onMouseLeave={() => (paused.current = false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
-      {/* subtle glow */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(200,180,140,0.16),transparent_60%)]" />
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
-      <div
-        ref={ref}
-        className={`relative mx-auto max-w-7xl px-6 transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
-      >
-        {/* ================= HEADER ================= */}
-        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
-
-          <span className="uppercase tracking-wide text-[11px] sm:text-xs text-[#b8945c]">
+        {/* HEADER */}
+        <div className="mb-8 sm:mb-10 text-center max-w-xl mx-auto">
+          <p className="text-xs sm:text-sm text-muted-foreground mb-2">
             Success Stories
-          </span>
-
-          <h2 className="font-serif text-[2rem] sm:text-[2.4rem] md:text-5xl leading-[1.15] mt-3 mb-4 sm:mb-6 text-neutral-900">
-            Real Women, Real Results
-          </h2>
-
-          <p className="text-neutral-600 text-base sm:text-lg">
-            Join hundreds of women who’ve transformed their health with FitHer.
           </p>
 
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl leading-tight text-foreground">
+            Real women.
+            <span className="block">Real transformation.</span>
+          </h2>
         </div>
 
-        {/* ================= TESTIMONIALS GRID ================= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-16 sm:mb-24">
+        {/* MAIN */}
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12">
 
-          {testimonials.map((testimonial, index) => (
-            <Card
-              key={index}
-              className={`rounded-3xl border border-neutral-200 bg-white/90 backdrop-blur shadow-sm transition-all duration-500 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${index * 80}ms` }}
-            >
-              <CardContent className="p-6 sm:p-9">
+          {/* IMAGE */}
+          <div className="relative w-[220px] sm:w-[260px] lg:w-[300px] h-[300px] sm:h-[340px] flex-shrink-0 mx-auto lg:mx-0">
 
-                {/* top row */}
-                <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
+            <div className="absolute -inset-3 bg-white/5 blur-xl rounded-xl" />
 
-                  <div className="flex items-center gap-3 sm:gap-4">
-                    <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#efe4d3]">
-                      <span className="font-serif text-base sm:text-lg text-[#b8945c]">
-                        {testimonial.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </span>
-                    </div>
+            {testimonials.map((t, i) => (
+              <Image
+                key={i}
+                src={t.image}
+                alt={t.name}
+                width={300}
+                height={360}
+                className={`absolute inset-0 rounded-xl object-cover transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  i === index
+                    ? "opacity-100 scale-100"
+                    : "opacity-0 scale-95"
+                }`}
+              />
+            ))}
+          </div>
 
-                    <div>
-                      <h4 className="font-medium text-neutral-900">
-                        {testimonial.name}
-                      </h4>
-                      <p className="text-sm text-neutral-500">
-                        {testimonial.role}
-                      </p>
-                    </div>
+          {/* TEXT */}
+          <div className="relative w-full max-w-md h-[220px] sm:h-[240px] flex items-center text-center lg:text-left">
+
+            {testimonials.map((t, i) => (
+              <div
+                key={i}
+                className={`absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  i === index
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4"
+                }`}
+              >
+                <span className="text-2xl sm:text-3xl opacity-20">“</span>
+
+                <div className="mt-2 text-sm sm:text-base leading-relaxed text-muted-foreground px-2 sm:px-0">
+                  {t.text}
+                </div>
+
+                <div className="mt-5 flex items-center justify-between flex-wrap gap-3 px-2 sm:px-0">
+
+                  <div>
+                    <p className="text-sm font-medium text-foreground">
+                      {t.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {t.info}
+                    </p>
                   </div>
 
-                  <span className="rounded-full bg-[#efe4d3] px-3 sm:px-4 py-1.5 text-[11px] sm:text-xs font-medium text-[#8c6b3f]">
-                    {testimonial.result}
+                  <span className="text-xs px-3 py-1 rounded-full bg-foreground text-background">
+                    {t.result}
                   </span>
 
                 </div>
+              </div>
+            ))}
 
-                {/* stars */}
-                <div className="mb-4 sm:mb-5 flex gap-1">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-4 w-4 fill-[#b8945c] text-[#b8945c]"
-                    />
-                  ))}
-                </div>
-
-                {/* quote */}
-                <div className="relative pl-7 sm:pl-8">
-                  <Quote className="absolute left-0 top-0 h-6 w-6 sm:h-7 sm:w-7 text-[#b8945c]/20" />
-                  <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
-                    {testimonial.quote}
-                  </p>
-                </div>
-
-              </CardContent>
-            </Card>
-          ))}
+          </div>
 
         </div>
 
-        {/* ================= STATS ================= */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-
-          {[
-            { value: "500+", label: "Women Transformed" },
-            { value: "4.9/5", label: "Average Rating" },
-            { value: "95%", label: "Success Rate" },
-            { value: "15+", label: "Years Experience" },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className={`rounded-3xl border border-neutral-200 bg-white/90 p-5 sm:p-8 text-center shadow-sm transition-all duration-500 ${
-                isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        {/* DOTS */}
+        <div className="flex justify-center gap-2 mt-5">
+          {testimonials.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndex(i)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                i === index
+                  ? "bg-foreground scale-125"
+                  : "bg-muted-foreground/40"
               }`}
-              style={{ transitionDelay: `${350 + index * 80}ms` }}
-            >
-              <p className="mb-1 sm:mb-2 text-3xl sm:text-4xl font-semibold text-[#b8945c]">
-                {stat.value}
-              </p>
-              <p className="text-xs sm:text-sm text-neutral-600">
-                {stat.label}
-              </p>
-            </div>
+            />
           ))}
-
         </div>
 
       </div>

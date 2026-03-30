@@ -1,80 +1,120 @@
+/* ================= TAILWIND ================= */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ================= THEME ================= */
 @layer base {
   :root {
-    /* FitHer™ Black & Gold Luxury Theme */
-    --background: 0 0% 5%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 37 91% 55%;
-    --primary-foreground: 0 0% 5%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 43 74% 49%;
-    --accent-foreground: 0 0% 5%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 18%;
-    --input: 0 0% 15%;
-    --ring: 37 91% 55%;
-    --chart-1: 37 91% 55%;
-    --chart-2: 43 74% 49%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 0 0% 70%;
-    --chart-5: 0 0% 50%;
-    --radius: 0.5rem;
-    --sidebar-background: 0 0% 5%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 37 91% 55%;
-    --sidebar-primary-foreground: 0 0% 5%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 37 91% 55%;
+  /* ===== CHARCOAL PREMIUM THEME ===== */
+
+  --background: 220 10% 8%;        /* deep charcoal */
+  --foreground: 210 15% 92%;       /* soft off-white */
+
+  --card: 220 10% 12%;
+  --card-foreground: 210 15% 92%;
+
+  --popover: 220 10% 12%;
+  --popover-foreground: 210 15% 92%;
+
+  --primary: 210 15% 92%;          /* off-white as accent */
+  --primary-foreground: 220 10% 8%;
+
+  --secondary: 220 8% 16%;
+  --secondary-foreground: 210 15% 92%;
+
+  --muted: 220 8% 18%;
+  --muted-foreground: 215 10% 65%;
+
+  --accent: 220 8% 22%;
+  --accent-foreground: 210 15% 92%;
+
+  --border: 220 8% 20%;
+  --input: 220 8% 18%;
+  --ring: 210 15% 80%;
+
+  --radius: 0.5rem;
+
+  /* sidebar */
+  --sidebar-background: 220 10% 8%;
+  --sidebar-foreground: 210 15% 92%;
+  --sidebar-primary: 210 15% 92%;
+  --sidebar-primary-foreground: 220 10% 8%;
+  --sidebar-accent: 220 8% 16%;
+  --sidebar-accent-foreground: 210 15% 92%;
+  --sidebar-border: 220 8% 20%;
+  --sidebar-ring: 210 15% 80%;
+}
+}
+
+/* ================= BASE STYLES ================= */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
   }
 }
 
+/* ================= UTILITIES ================= */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/* Custom scrollbar */
+/* ================= SCROLLBAR ================= */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(0 0% 8%);
+  background: hsl(222 35% 10%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(37 91% 55%);
+  background: hsl(217 91% 60%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(43 74% 49%);
+  background: hsl(217 91% 50%);
 }
 
-/* Smooth scroll */
+/* ================= SMOOTH SCROLL ================= */
 html {
   scroll-behavior: smooth;
+}
+
+/* APPLE STYLE REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* GLOW HOVER */
+.glow-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.08), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.glow-card:hover::before {
+  opacity: 1;
 }

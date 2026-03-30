@@ -22,7 +22,7 @@ export function Header() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/90 backdrop-blur-md shadow-sm rounded-b-3xl mx-4 mt-2"
+          ? "bg-background/80 backdrop-blur-md border border-border rounded-b-2xl mx-4 mt-2"
           : "bg-transparent"
       }`}
     >
@@ -31,48 +31,41 @@ export function Header() {
 
           {/* ================= LOGO ================= */}
           <Link href="/" className="flex items-center gap-2">
-            <span className="font-serif text-2xl text-neutral-900">
-              Fit<span className="text-[#b8945c]">Her</span>
+            <span className="font-serif text-2xl tracking-tight text-foreground">
+              Fit<span className="opacity-70">Her</span>
             </span>
           </Link>
 
-          {/* ================= DESKTOP NAV ================= */}
-          <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-neutral-700">
-            <Link href="#home" className="hover:text-[#b8945c] transition">
-              Home
-            </Link>
-            <Link href="#about" className="hover:text-[#b8945c] transition">
-              About
-            </Link>
-            <Link href="#program" className="hover:text-[#b8945c] transition">
+          {/* ================= NAV ================= */}
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium tracking-tight text-muted-foreground">
+            <Link href="#program" className="hover:text-foreground transition">
               Program
             </Link>
-            <Link
-              href="#testimonials"
-              className="hover:text-[#b8945c] transition"
-            >
-              Success Stories
+            <Link href="#benefits" className="hover:text-foreground transition">
+              Benefits
             </Link>
-            <Link href="#blog" className="hover:text-[#b8945c] transition">
-              Blog
+            <Link href="#testimonials" className="hover:text-foreground transition">
+              Results
             </Link>
           </nav>
 
-          {/* ================= DESKTOP CTA ================= */}
+          {/* ================= CTA ================= */}
           <Button
             asChild
-            className="hidden md:inline-flex rounded-full bg-[#b8945c] px-6 py-3 text-sm font-medium text-white hover:bg-[#a07f4a]"
+            className="hidden md:inline-flex rounded-full bg-foreground text-background px-6 py-2.5 text-sm font-medium tracking-tight hover:opacity-90 hover:scale-[1.03] transition"
           >
-            <Link href="#contact">Book a Free Consultation</Link>
+            <Link href="#contact">
+              Start Your Journey
+            </Link>
           </Button>
 
-          {/* ================= MOBILE MENU BUTTON ================= */}
+          {/* ================= MOBILE BUTTON ================= */}
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden text-neutral-900"
+            className="md:hidden text-foreground"
             aria-label="Toggle menu"
           >
-            {open ? <X size={28} /> : <Menu size={28} />}
+            {open ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
       </div>
@@ -83,32 +76,27 @@ export function Header() {
           open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="mx-4 mb-4 rounded-3xl bg-white/95 backdrop-blur-md shadow-lg p-6 flex flex-col gap-5 text-neutral-800">
+        <div className="mx-4 mb-4 rounded-2xl bg-card/95 backdrop-blur-md border border-border p-6 flex flex-col gap-5 text-foreground tracking-tight">
 
-          <Link onClick={() => setOpen(false)} href="#home">
-            Home
-          </Link>
-          <Link onClick={() => setOpen(false)} href="#about">
-            About
-          </Link>
           <Link onClick={() => setOpen(false)} href="#program">
             Program
           </Link>
-          <Link onClick={() => setOpen(false)} href="#testimonials">
-            Success Stories
+          <Link onClick={() => setOpen(false)} href="#benefits">
+            Benefits
           </Link>
-          <Link onClick={() => setOpen(false)} href="#blog">
-            Blog
+          <Link onClick={() => setOpen(false)} href="#testimonials">
+            Results
           </Link>
 
           <Button
             asChild
-            className="mt-2 rounded-full bg-[#b8945c] py-3 text-white hover:bg-[#a07f4a]"
+            className="mt-2 rounded-full bg-foreground text-background py-3 hover:opacity-90 transition"
           >
             <Link onClick={() => setOpen(false)} href="#contact">
-              Book a Free Consultation
+              Start Your Journey
             </Link>
           </Button>
+
         </div>
       </div>
     </header>
