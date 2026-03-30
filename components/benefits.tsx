@@ -37,10 +37,36 @@ export function Benefits() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSubmitted(true)
+    setLoading(true)
+
+    try {
+      // ✅ Send data to Formspree
+      await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+        }),
+      })
+
+      // ✅ PRO TIP: Force PDF download
+      window.open("/guide.pdf", "_blank")
+
+      // ✅ Show success UI
+      setSubmitted(true)
+
+    } catch (error) {
+      console.error("Error submitting form:", error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -50,10 +76,9 @@ export function Benefits() {
     >
       <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
 
-        {/* ================= LEFT ================= */}
+        {/* LEFT */}
         <div className="max-w-md mx-auto lg:mx-0 text-left">
 
-          {/* HEADER */}
           <div className="mb-10">
             <p className="text-xs sm:text-sm text-muted-foreground mb-2">
               Your Transformation
@@ -65,48 +90,33 @@ export function Benefits() {
             </h2>
           </div>
 
-          {/* ================= TIMELINE FLOW ================= */}
           <div className="relative mt-10">
-
-            {/* vertical line */}
             <div className="absolute left-5 top-0 bottom-0 w-px bg-border" />
 
             <div className="space-y-10">
-
               {benefits.map((b, i) => (
                 <div
                   key={i}
                   className="flex items-start gap-5 group transition-all duration-300 hover:translate-x-1"
                 >
-
-                  {/* ICON */}
                   <div className="z-10 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background shadow-sm group-hover:border-foreground/40 transition">
-
                     <b.icon className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition" />
-
                   </div>
 
-                  {/* TEXT */}
                   <div>
                     <h3 className="text-base font-medium text-foreground">
                       {b.title}
                     </h3>
-
                     <p className="text-sm text-muted-foreground mt-1 max-w-sm leading-relaxed">
                       {b.desc}
                     </p>
                   </div>
-
                 </div>
               ))}
-
             </div>
-
           </div>
 
-          {/* ================= RESULT ================= */}
           <div className="mt-12 border-t border-border pt-8">
-
             <p className="text-xs uppercase tracking-wide text-muted-foreground">
               Most clients experience
             </p>
@@ -124,12 +134,11 @@ export function Benefits() {
             <p className="mt-3 text-sm text-muted-foreground">
               without extreme routines or burnout
             </p>
-
           </div>
 
         </div>
 
-        {/* ================= RIGHT ================= */}
+        {/* RIGHT (FORM) */}
         <div className="flex justify-center lg:justify-end">
 
           <div className="border border-border rounded-2xl p-6 sm:p-8 bg-card w-full max-w-sm text-center hover:scale-[1.02] transition">
@@ -169,8 +178,12 @@ export function Benefits() {
                   className="bg-background border-border text-sm"
                 />
 
-                <Button className="w-full rounded-full py-4 text-sm font-medium bg-primary text-primary-foreground">
-                  Get Free Guide →
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full rounded-full py-4 text-sm font-medium bg-primary text-primary-foreground"
+                >
+                  {loading ? "Unlocking..." : "Unlock My Guide →"}
                 </Button>
 
                 <p className="text-[11px] text-muted-foreground">
@@ -179,9 +192,20 @@ export function Benefits() {
 
               </form>
             ) : (
-              <p className="text-sm text-foreground">
-                Check your inbox — it's sent.
-              </p>
+              <div className="space-y-4">
+                <p className="text-sm text-foreground">
+                  Your guide is downloading…
+                </p>
+
+                {/* 🔥 HIGH CONVERSION ADDITION */}
+                <a
+                  href="https://wa.me/8586916398?text=Hi!%20I%27m%20interested%20in%20the%20FitHer%20program."
+                  target="_blank"
+                  className="inline-block text-sm bg-green-500 text-white px-4 py-2 rounded-full"
+                >
+                  Get Personal Help on WhatsApp →
+                </a>
+              </div>
             )}
 
           </div>
