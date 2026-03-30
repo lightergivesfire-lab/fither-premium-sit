@@ -6,45 +6,45 @@
 /* ================= THEME ================= */
 @layer base {
   :root {
-  /* ===== CHARCOAL PREMIUM THEME ===== */
+    /* ===== CHARCOAL PREMIUM THEME ===== */
 
-  --background: 220 10% 8%;        /* deep charcoal */
-  --foreground: 210 15% 92%;       /* soft off-white */
+    --background: 220 10% 8%;
+    --foreground: 210 15% 92%;
 
-  --card: 220 10% 12%;
-  --card-foreground: 210 15% 92%;
+    --card: 220 10% 12%;
+    --card-foreground: 210 15% 92%;
 
-  --popover: 220 10% 12%;
-  --popover-foreground: 210 15% 92%;
+    --popover: 220 10% 12%;
+    --popover-foreground: 210 15% 92%;
 
-  --primary: 210 15% 92%;          /* off-white as accent */
-  --primary-foreground: 220 10% 8%;
+    --primary: 210 15% 92%;
+    --primary-foreground: 220 10% 8%;
 
-  --secondary: 220 8% 16%;
-  --secondary-foreground: 210 15% 92%;
+    --secondary: 220 8% 16%;
+    --secondary-foreground: 210 15% 92%;
 
-  --muted: 220 8% 18%;
-  --muted-foreground: 215 10% 65%;
+    --muted: 220 8% 18%;
+    --muted-foreground: 215 10% 65%;
 
-  --accent: 220 8% 22%;
-  --accent-foreground: 210 15% 92%;
+    --accent: 220 8% 22%;
+    --accent-foreground: 210 15% 92%;
 
-  --border: 220 8% 20%;
-  --input: 220 8% 18%;
-  --ring: 210 15% 80%;
+    --border: 220 8% 20%;
+    --input: 220 8% 18%;
+    --ring: 210 15% 80%;
 
-  --radius: 0.5rem;
+    --radius: 0.5rem;
 
-  /* sidebar */
-  --sidebar-background: 220 10% 8%;
-  --sidebar-foreground: 210 15% 92%;
-  --sidebar-primary: 210 15% 92%;
-  --sidebar-primary-foreground: 220 10% 8%;
-  --sidebar-accent: 220 8% 16%;
-  --sidebar-accent-foreground: 210 15% 92%;
-  --sidebar-border: 220 8% 20%;
-  --sidebar-ring: 210 15% 80%;
-}
+    /* sidebar */
+    --sidebar-background: 220 10% 8%;
+    --sidebar-foreground: 210 15% 92%;
+    --sidebar-primary: 210 15% 92%;
+    --sidebar-primary-foreground: 220 10% 8%;
+    --sidebar-accent: 220 8% 16%;
+    --sidebar-accent-foreground: 210 15% 92%;
+    --sidebar-border: 220 8% 20%;
+    --sidebar-ring: 210 15% 80%;
+  }
 }
 
 /* ================= BASE STYLES ================= */
@@ -67,20 +67,34 @@
 
 /* ================= SCROLLBAR ================= */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(222 35% 10%);
+  background: hsl(220 10% 10%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(217 91% 60%);
+  background: hsl(220 8% 30%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(217 91% 50%);
+  background: hsl(220 8% 40%);
+}
+
+/* ================= HORIZONTAL SCROLL FIX ================= */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
 }
 
 /* ================= SMOOTH SCROLL ================= */
@@ -88,33 +102,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* APPLE STYLE REVEAL */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px) scale(0.98);
-  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal.show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* GLOW HOVER */
-.glow-card {
-  position: relative;
-  overflow: hidden;
-}
-
-.glow-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.08), transparent 40%);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.glow-card:hover::before {
-  opacity: 1;
+/* ================= SECTION OFFSET ================= */
+section {
+  scroll-margin-top: 100px;
 }
